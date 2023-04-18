@@ -1,0 +1,18 @@
+---
+- name: start an instance with a public IP address
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  tasks:
+    - name: Create EC2
+      amazon.aws.ec2_instance:
+        name: "public-compute-instance"
+        key_name: "default"
+        vpc_subnet_id: subnet-0da605b66d9211363
+        instance_type: t2.micro
+        security_group: default
+        network:
+          assign_public_ip: true
+        image_id: ami-06e46074ae430fba6
+        tags:
+          Environment: Testing
